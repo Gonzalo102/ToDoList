@@ -1,0 +1,79 @@
+* {
+    margin: 0px;
+    padding: 0px;
+ }
+
+
+.header{
+    background-color: rgb(0, 0, 0, 0.9);
+    color: white;
+    padding: 2em;
+
+}
+
+.container{
+    display: flex;
+}
+
+button {
+	background: none;
+	color: inherit;
+	border: 1px solid black;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.nav{
+    background-color: lightslategrey;
+    width: 30%;
+    height: 100%;
+}
+
+.nav-wrapper{
+    display:inline-flex;
+    flex-direction: column;
+    padding: 20px;
+    row-gap: 30px;;
+
+}
+
+.form{
+    margin: 0 auto;
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 10%;
+    z-index: 1;
+    background-color: white;
+    border: 1px solid black;
+    padding: 1em;
+}
+
+.display{
+    display: none;
+  }
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.flex-project{
+    display: flex;
+    background-color: grey;
+    justify-content: space-between;
+    width: 150px;
+}
+
+.delete-project{
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.task-container{
+    background-color: aqua;
+    width: 100%;
+}

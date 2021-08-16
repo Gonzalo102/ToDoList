@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ToDoList</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <h1>Todo List</h1>
+    </div>
+    <div class="container">
+        <div class="nav">
+            <h2> Projects </h2>
+            <div class="nav-wrapper">
+                <ul class="project-list">
+                    <!-- loading projects -->
+                </ul>
+                <button class="add-project-button"> + Add Proyect </button>
+                <div class="form display">
+                    <form action="/my-handling-form-page">
+                        <ul>
+                            <li>
+                                <label class="label" for="name">Project name:</label>
+                                <input class="input" type="text" id="project_name">
+                            </li>
+                            <li>
+                                <button type="button" id="submit-project">Add</button>
+                            </li>
+                            <li>
+                                <button type="button" id="close-project">Close</button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="task-container">
+            <h1>Default Project</h1>
+            <ul>
+                <li> Task 1</li>
+                <li> Task 2</li>
+                <li> Task 3</li>
+            </ul>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
