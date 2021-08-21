@@ -20,30 +20,37 @@
                 </ul>
                 <button class="add-project-button"> + Add Proyect </button>
                 <div class="form display">
-                    <form action="/my-handling-form-page">
+                    <form action="project-form">
                         <ul>
                             <li>
-                                <label class="label" for="name">Project name:</label>
+                                <label class="label" for="name">Name:</label>
                                 <input class="input" type="text" id="project_name">
                             </li>
-                            <li>
-                                <button type="button" id="submit-project">Add</button>
-                            </li>
-                            <li>
-                                <button type="button" id="close-project">Close</button>
-                            </li>
+                            <div class="form-buttons">
+                                <li>
+                                    <button type="button" id="submit-project">Add</button>
+                                </li>
+                                <li>
+                                    <button type="button" id="close-project">Close</button>
+                                </li>
+                            </div>
                         </ul>
                     </form>
                 </div>
             </div>
         </div>
-        <div class="task-container">
-            <h1>Default Project</h1>
-            <ul>
-                <li> Task 1</li>
-                <li> Task 2</li>
-                <li> Task 3</li>
+        <div class="project-task-container">
+            <div class="titles-tasks">
+                <h1 class="project-title">Default Project</h1>
+                <h3>Due Date</h3>
+            </div>
+            <ul class="tasks">
+                <!-- loading tasks -->
             </ul>
+            <div class="button-task"></div>
+            <div class="form-todo display">
+                <!-- loading form -->
+            </div>
         </div>
     </div>
     <script src="main.js"></script>
