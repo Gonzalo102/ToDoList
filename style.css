@@ -26,6 +26,7 @@ html, body {
     display: flex;
     height: 100%;
     background-color: var(--secondary-light);
+    transition: 0.5s;
 }
 
 button {
@@ -45,6 +46,13 @@ button {
     padding: 10px;
 }
 
+.nav h2{
+    margin-left: 20px;
+    font-size: 28px;
+    text-decoration: underline;
+    margin-bottom: -10px;
+}
+
 .nav-wrapper{
     display:inline-flex;
     flex-direction: column;
@@ -62,7 +70,7 @@ button {
 }
 
 .form{
-    width: 150px;
+    width: 228px;
     position: relative;
     z-index: 1;
     background-color: var(--secondary-light);
@@ -70,6 +78,10 @@ button {
     padding: 1em;
     display: block;
     font-size: larger;
+}
+
+.form div li{
+    width: 45%;
 }
 
 .form button{
@@ -90,12 +102,14 @@ button {
 #submit-project{
     background-color: #aaffaa;
     padding: 3px;
+    width: 100%;
   
 }
 
 #close-project{
     background-color: #ffbebe;
     padding: 3px;
+    width: 100%;
 }
 
 
@@ -139,7 +153,7 @@ ul {
 
 .titles-tasks{
     display: flex;
-    width: 80%;
+    width: 77%;
     justify-content: space-between;
     margin-top: 40px;
 }
@@ -160,9 +174,10 @@ ul {
     background-color: var(--primary-light);
     width: 90%;
     display: grid;
-    grid-template-columns: 1fr 140px 20px 20px;
+    grid-template-columns: 1fr 140px 20px 20px 20px;
     grid-template-rows: 1fr;
   }
+
   
   .tasks li {
     border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -205,6 +220,16 @@ ul {
   }
 
   .delete-icon:hover{
+    opacity: 1;
+}
+
+.info-icon{
+    width: 15px;
+    cursor: pointer;
+    opacity: 0.4;
+}
+
+.info-icon:hover{
     opacity: 1;
 }
 
@@ -253,4 +278,44 @@ ul {
 .form-buttons li{
     width: 40%;
     text-align: center;
+}
+
+.project-title{
+    color: var(--primary-dark);
+}
+
+.form-info{
+    margin: 0 auto;
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.form-info li{
+    margin-bottom: 10px;
+}
+
+.is-blurred {
+    filter: blur(2px);
+    -webkit-filter: blur(2px);
+    pointer-events: none;
+    user-select: none;
+  }
+
+#close-info{
+    position: absolute;
+    top: 4%;
+    right: 2%;
+    border: none;
+}
+
+#close-info:hover{
+    background-color: #ccc;
 }
