@@ -319,3 +319,21 @@ ul {
 #close-info:hover{
     background-color: #ccc;
 }
+
+.form-edit{
+    margin: 0 auto;
+    width: 400px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 1em;
+    padding: 1em;
+}
+
+.form-edit li{
+    margin-bottom: 10px;
+}
