@@ -1,7 +1,6 @@
 let myProjects = JSON.parse(localStorage.getItem('projects')) || [];
 //iterar .myproject for each
 
-
 class Todos {
     constructor(title, description, dueDate, done, priority) {
         this.title = title;
@@ -33,6 +32,40 @@ function addTask() {
 
 }
 
+function editTask () {
+    console.log('editing task');
+
+    console.log(this);
+    console.log('displaying edit task');
+    let i = Number(this.getAttribute('data-index-edit-task'));
+    let ind = Number(this.getAttribute('data-index-edit-task-project'));
+    
+    const title = myProjects[ind].tasks[i].title;
+    const description = myProjects[ind].tasks[i].description;
+    const dueDate = myProjects[ind].tasks[i].dueDate;
+
+    createEditForm(title, description, dueDate, ind, i);
+
+}
+
+//Edit Tasks
+function renderEdit () {
+
+    const input1 = document.getElementById('todo_title_edit').value;
+    const input2 = document.getElementById('todo_description_edit').value;
+    const input3 = document.getElementById('todo_duedate_edit').value;
+
+    const ind = Number(this.getAttribute('data-index-submit-task-edit'));
+    const i = Number(this.getAttribute('data-index-task-edit'));
+    console.log('Edit Task Function: index for project:' + ind);
+    myProjects[ind].tasks[i].title = input1;
+    myProjects[ind].tasks[i].description = input2;
+    myProjects[ind].tasks[i].dueDate = input3;
+    console.log(myProjects);
+    displayTasks(ind);
+    localStorage.setItem('projects', JSON.stringify(myProjects));
+}
+
 //delete Task from DOM and Array
 function deleteTask() {
     console.log(this);
@@ -57,7 +90,7 @@ function deleteProject (){
     const ind = Number(this.getAttribute('data-index-project'));
     console.log(ind);
     
-    const parent = this.parentElement;
+    const parent = this.parentElement.parentElement;
     parent.parentElement.removeChild(parent);
     if (ind > -1) {
         myProjects.splice(ind, 1);
@@ -84,15 +117,15 @@ const addProjectButton = document.querySelector('.add-project-button');
 const closeProjectButton = document.getElementById('close-project');
 const submitProjectButton = document.getElementById('submit-project');
 const projectList = document.querySelector('.project-list');
-const deleteProjectButton = document.querySelectorAll('.delete-project');
 
 //EVENT LISTENERS
 addProjectButton.addEventListener('click', showForm);
+
 closeProjectButton.addEventListener('click', showForm);
 submitProjectButton.addEventListener('click', addProject);
 submitProjectButton.addEventListener('click', showForm);
 submitProjectButton.addEventListener('click', () => displayProjects(myProjects.length - 1));
-
+submitProjectButton.addEventListener('click', () => displayProjectPreview(myProjects.length - 1));
 
 function innitTaskButtons (ind) {
     const taskDeleteButtons = document.querySelectorAll('.delete-icon');
@@ -103,74 +136,16 @@ function innitTaskButtons (ind) {
     taskInfoButtons.forEach((taskButton)=>taskButton.addEventListener('click', displayInfoTask));
     const tasksList = document.querySelector('.tasks');
     tasksList.addEventListener('click', toggleDone);
-    const taskEditButtons = document.querySelectorAll('.edit-icon');
+    const taskEditButtons = document.querySelectorAll('#edit-icon-id');
     taskEditButtons.forEach((taskButton)=>taskButton.addEventListener('click', editTask));
-}
-
-function editTask () {
-    console.log('editing task');
-
-    console.log(this);
-    console.log('displaying edit task');
-    let i = Number(this.getAttribute('data-index-edit-task'));
-    let ind = Number(this.getAttribute('data-index-edit-task-project'));
-    
-    const title = myProjects[ind].tasks[i].title;
-    const description = myProjects[ind].tasks[i].description;
-    const dueDate = myProjects[ind].tasks[i].dueDate;
-
-    createEditForm(title, description, dueDate, ind);
-
-}
-
-function createEditForm(title, description, Duedate, ind){
-        //creating edit Form
-        const formEdit = document.querySelector('.form-edit');
-        formEdit.classList.toggle("display");
-
-        formEdit.innerHTML = `
-        <form action="info-edit">
-        <ul>
-            <li>
-                <label class="Todo-title" for="name">Title:</label>
-                <input value="${title}" class="Todo-input" type="text" id="todo_title_edit">
-            </li>
-            <li>
-                <label class="Todo-description" for="name">Description:</label>
-                <input value="${description}" class="Todo-input" type="text" id="todo_description_edit">
-            </li>
-            <li>
-                <label class="Todo-duedate" for="name">Duedate:</label>
-                <input value="${Duedate}" class="Todo-input" type="text" id="todo_duedate_edit">
-            </li>
-            <div>
-                <li>
-                    <button data-index-submit-task-edit="${ind}" type="button" id="submit-edit"> Submit </button>
-                </li>
-            </div>
-        </ul>`
-
-    innitEditButtons();
-
 }
 
 function innitEditButtons(){
     const submitEditButton = document.getElementById('submit-edit');
     submitEditButton.addEventListener('click', hideEditForm);
     submitEditButton.addEventListener('click', renderEdit);
-}
-
-function renderEdit () {
-    const input1 = document.getElementById('todo_title_edit').value;
-    const input2 = document.getElementById('todo_description_edit').value;
-    const input3 = document.getElementById('todo_duedate_edit').value;
-
-    const ind = Number(this.getAttribute('data-index-submit-task-edit'));
-    console.log('Edit Task Function: index for project:' + ind);
-    myProjects[ind].tasks.push(new Todos(input1, input2, input3));
-    console.log(myProjects);
-    displayTasks(ind);
-    //localStorage.setItem('projects', JSON.stringify(myProjects));
+    const closeEditButton = document.getElementById('close-edit');
+    closeEditButton.addEventListener('click', hideEditForm);
 }
 
 function hideEditForm (){
@@ -261,35 +236,132 @@ function showTodoForm(ind) {
     innitFormButtons(ind);
 }
 
-function removeTodoForm() {
-    const formTodo = document.querySelector('.form-todo-container');
 
-    formTodo.innerHTML = '';
+function createEditForm(title, description, Duedate, ind, i){
+    //creating edit Form
+    const formEdit = document.querySelector('.form-edit');
+    formEdit.classList.toggle("display");
+
+    formEdit.innerHTML = `
+    <form action="info-edit">
+    <ul>
+        <li>
+            <label class="Todo-title" for="name">Title:</label>
+            <input value="${title}" class="Todo-input" type="text" id="todo_title_edit">
+        </li>
+        <li>
+            <label class="Todo-description" for="name">Description:</label>
+            <input value="${description}" class="Todo-input" type="text" id="todo_description_edit">
+        </li>
+        <li>
+            <label class="Todo-duedate" for="name">Duedate:</label>
+            <input value="${Duedate}" class="Todo-input" type="text" id="todo_duedate_edit">
+        </li>
+        <div class="form-buttons">
+            <li>
+                <button data-index-task-edit="${i}" data-index-submit-task-edit="${ind}" type="button" id="submit-edit"> Edit </button>
+            </li>
+            <li>
+                <button type="button" id="close-edit"> Close </button>
+            </li>
+        </div>
+    </ul>`
+
+innitEditButtons();
 
 }
 
 function displayProjects(i){
     const newDiv = document.createElement("div");
+    const nameDiv = document.createElement("div");
+    const buttonsDiv = document.createElement("div");
     const newProjectName = document.createElement("li"); 
+    const newEditButton = document.createElement("img");
     const newDeleteButton = document.createElement("li");
 
     newDiv.classList.add("flex-project");
     newProjectName.textContent = myProjects[i].name; 
     newProjectName.setAttribute('data-index-project-name', i);
+    newEditButton.src = 'images/edit.svg';
+    newEditButton.classList.add('edit-icon');
+    newEditButton.setAttribute('data-index-project-edit', i);
     newDeleteButton.addEventListener('click', deleteProject);
     newDeleteButton.setAttribute('data-index-project', i);
     newDeleteButton.textContent = "x";
     newDeleteButton.classList.add('delete-project');
+    buttonsDiv.classList.add('flex-buttons-div');
 
     newProjectName.addEventListener('click', displayProjectPreview);
+    newEditButton.addEventListener('click', createEditProjectNameForm);
+    newDeleteButton.addEventListener('click', () => displayProjectPreview(myProjects.length - 1));
     
-    newDiv.appendChild(newProjectName);
-    newDiv.appendChild(newDeleteButton);
+    nameDiv.appendChild(newProjectName);
+    buttonsDiv.appendChild(newEditButton);
+    buttonsDiv.appendChild(newDeleteButton);
+    newDiv.appendChild(nameDiv);
+    newDiv.appendChild(buttonsDiv);
     projectList.appendChild(newDiv);
 }
 
-function displayProjectPreview(){
-    const ind = Number(this.getAttribute('data-index-project-name'));
+function createEditProjectNameForm () {
+    const ind = Number(this.getAttribute('data-index-project-edit'));
+    console.log('Creating Form');
+    const newForm = document.querySelector('.form-edit-project');
+    newForm.classList.toggle('display');
+    console.log('createEditProjectNameForm Index' + ind);
+    newForm.innerHTML =         `
+    <form class="form-project" action="form-project">
+    <ul>
+        <li>
+            <input type="text" id="todo_title_edit_project">
+        </li>
+        <div class="form-buttons">
+            <li>
+                <button type="button" id="submit-project-name" data-index-submit-project-name="${ind}"> Change Name</button>
+            </li>
+            <li>
+                <button type="button" id="close-project-name"> Close </button>
+            </li>
+        </div>
+    </ul>`
+
+    innitProjectForms();
+}
+
+function innitProjectForms () {
+    const submitProjectName = document.getElementById('submit-project-name');
+    submitProjectName.addEventListener('click', editProjectName);
+    submitProjectName.addEventListener('click', hideEditProjectForm);
+    const closeProjectName = document.getElementById('close-project-name');
+    closeProjectName.addEventListener('click', hideEditProjectForm);
+}
+
+function editProjectName () {
+    const ind = Number(this.getAttribute('data-index-submit-project-name'));
+    const input1 = document.getElementById('todo_title_edit_project').value;
+    myProjects[ind].name = input1;
+    updateProjectName(ind);
+    localStorage.setItem('projects', JSON.stringify(myProjects));
+}
+
+function updateProjectName (ind){
+
+    const projectName = document.querySelectorAll('[data-index-project-name]');
+    const arrayProjects = Array.from(projectName);
+    console.log(Array.from(projectName));
+    console.log('index parameter' + ind);
+    arrayProjects[ind].innerHTML = myProjects[ind].name;
+    displayProjectPreview(ind);
+}
+
+function displayProjectPreview(i){
+    
+    let ind = i;
+    try {ind = Number(this.getAttribute('data-index-project-name'));
+    } catch (error) {
+        console.log(error);
+    }
+    console.log('ind' + ind);
     const projectTitle = document.querySelector('.project-title');
     projectTitle.innerHTML = myProjects[ind].name;
 
@@ -298,7 +370,10 @@ function displayProjectPreview(){
     displayTasks(ind);
     createAddTasksButton(ind);
     innitTaskButtons(ind);
-  
+}
+
+function displayLastAddedProject(i){
+    
 }
 
 function createAddTasksButton(ind){
@@ -307,6 +382,7 @@ function createAddTasksButton(ind){
 }
 
 function displayProjectsInStorage(myProjects) {
+
     for (let i = 0; i < myProjects.length; i++) {
         displayProjects(i);
     }
@@ -327,7 +403,7 @@ function displayTasks(ind) {
          <label for="task${i}" data-project="${ind}" data-index="${i}"> ${task.title} </label>
          <i class="due-date">${task.dueDate}</i> 
          <img data-index-info-task-project="${ind}" data-index-info-task="${i}" class="info-icon" src="images/info-icon.jpg" alt="">
-         <img data-index-edit-task-project="${ind}" data-index-edit-task="${i}" class="edit-icon" src="images/edit.svg" alt="">
+         <img data-index-edit-task-project="${ind}" data-index-edit-task="${i}" class="edit-icon" id="edit-icon-id" src="images/edit.svg" alt="">
          <img data-index-delete-task-project="${ind}" data-index-delete-task="${i}" class="delete-icon" src="images/delete.svg" alt="">
      </div>
      </li>`
@@ -336,20 +412,6 @@ function displayTasks(ind) {
     innitTaskButtons(ind);
 }
 
-function toggleDone(e) {
-    if (!e.target.matches('label')) return; // skip this unless it's an input
-    const el = e.target;
-    console.log(el);
-    const index = el.dataset.index;
-    const ind = el.dataset.project;
-    console.log('Index Task:' + index);
-    console.log('Index Project:' + ind);
-    myProjects[ind].tasks[index].done = !myProjects[ind].tasks[index].done;
-    localStorage.setItem('projects', JSON.stringify(myProjects));
-    //items[index].done = !items[index].done;
-    //localStorage.setItem('items', JSON.stringify(items));
-    //populateList(items, itemsList);
-  }
 
 function displayInfoTask() {
     console.log(this);
@@ -371,9 +433,38 @@ function hideInfoForm() {
     container.className = "container";
 }
 
+function hideEditProjectForm () {
+    const newForm = document.querySelector('.form-edit-project');
+    newForm.innerHTML = '';
+    newForm.classList.toggle("display");
+}
+
 function showForm(){
     const form = document.querySelector('.form');
     form.classList.toggle("display");
+}
+
+function removeTodoForm() {
+    const formTodo = document.querySelector('.form-todo-container');
+    formTodo.innerHTML = '';
+}
+
+
+function toggleDone(e) {
+    if (!e.target.matches('label')) return; // skip this unless it's a label
+    const el = e.target;
+    console.log(el);
+    const index = el.dataset.index;
+    const ind = el.dataset.project;
+    console.log('Index Task:' + index);
+    console.log('Index Project:' + ind);
+    myProjects[ind].tasks[index].done = !myProjects[ind].tasks[index].done;
+    localStorage.setItem('projects', JSON.stringify(myProjects));
+  }
+
+function setInitialTitle (){
+    const projectTitle = document.querySelector('.project-title');
+    projectTitle.innerHTML = myProjects[0].name;
 }
 
 createAddTasksButton(0);
@@ -381,3 +472,5 @@ createDefaultProject();
 createDefaultTasks();
 displayTasks(0);
 displayProjectsInStorage(myProjects);
+setInitialTitle ();
+
