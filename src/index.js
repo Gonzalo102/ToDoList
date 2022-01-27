@@ -18,25 +18,22 @@ class Project {
     }
 }
 
-function addTask() {
+function addTask(e) {
+    e.preventDefault()
+
     const input1 = document.getElementById('todo_title').value;
     const input2 = document.getElementById('todo_description').value;
     const input3 = document.getElementById('todo_duedate').value;
 
     const ind = Number(this.getAttribute('data-index-submit-task'));
-    console.log('Add Task Function: index for project:' + ind);
     myProjects[ind].tasks.push(new Todos(input1, input2, input3));
-    console.log(myProjects);
     displayTasks(ind);
     localStorage.setItem('projects', JSON.stringify(myProjects));
 
 }
 
 function editTask () {
-    console.log('editing task');
 
-    console.log(this);
-    console.log('displaying edit task');
     let i = Number(this.getAttribute('data-index-edit-task'));
     let ind = Number(this.getAttribute('data-index-edit-task-project'));
     
@@ -57,22 +54,18 @@ function renderEdit () {
 
     const ind = Number(this.getAttribute('data-index-submit-task-edit'));
     const i = Number(this.getAttribute('data-index-task-edit'));
-    console.log('Edit Task Function: index for project:' + ind);
     myProjects[ind].tasks[i].title = input1;
     myProjects[ind].tasks[i].description = input2;
     myProjects[ind].tasks[i].dueDate = input3;
-    console.log(myProjects);
     displayTasks(ind);
     localStorage.setItem('projects', JSON.stringify(myProjects));
 }
 
 //delete Task from DOM and Array
 function deleteTask() {
-    console.log(this);
     let i = Number(this.getAttribute('data-index-delete-task'));
     let ind = Number(this.getAttribute('data-index-delete-task-project'));
     myProjects[ind].tasks.splice(i, 1);
-    console.log(myProjects);
     displayTasks(ind);
     innitTaskButtons (ind);
     localStorage.setItem('projects', JSON.stringify(myProjects));
@@ -83,12 +76,10 @@ function addProject (){
     const input1 = document.getElementById('project_name').value;
     myProjects.push( new Project(input1));
     localStorage.setItem('projects', JSON.stringify(myProjects));
-    console.log(myProjects);
 }
 
 function deleteProject (){
     const ind = Number(this.getAttribute('data-index-project'));
-    console.log(ind);
     
     const parent = this.parentElement.parentElement;
     parent.parentElement.removeChild(parent);
@@ -96,7 +87,6 @@ function deleteProject (){
         myProjects.splice(ind, 1);
 	}
     localStorage.setItem('projects', JSON.stringify(myProjects));
-    console.log(myProjects);
 }
 
 function createDefaultProject (){
@@ -107,7 +97,7 @@ function createDefaultProject (){
 
 function createDefaultTasks (){
     if(myProjects[0].tasks.length === 0){
-        myProjects[0].tasks.push( new Todos('Hacer Bolso', 'Hacer el Bolso para Bariloche', '25/10/2021'));
+        myProjects[0].tasks.push( new Todos('Pack my Bag for my trip to Barcelona', 'Pack my bag for my trip to Barcelona', '25/10/2021'));
     }
 }
 
@@ -126,6 +116,8 @@ submitProjectButton.addEventListener('click', addProject);
 submitProjectButton.addEventListener('click', showForm);
 submitProjectButton.addEventListener('click', () => displayProjects(myProjects.length - 1));
 submitProjectButton.addEventListener('click', () => displayProjectPreview(myProjects.length - 1));
+window.addEventListener('keydown', handleKeyDownProjectForm)
+
 
 function innitTaskButtons (ind) {
     const taskDeleteButtons = document.querySelectorAll('.delete-icon');
@@ -148,22 +140,33 @@ function innitEditButtons(){
     closeEditButton.addEventListener('click', hideEditForm);
 }
 
+//keyboard Support
+
+function handleKeyDownProjectForm (e) {
+    const form = document.querySelector('.form');
+    if (form.className == "form display" || e.key !== 'Enter') return
+    e.preventDefault()
+    addProject()
+    showForm()
+    displayProjects(myProjects.length - 1)
+    displayProjectPreview(myProjects.length - 1)
+}
+
 function hideEditForm (){
-    console.log('hide edit form');
     const formEdit = document.querySelector('.form-edit');
     formEdit.classList.toggle("display");
 }
 
 function innitFormButtons (ind){
 
-    console.log('inniting form buttons');
     const closeTodoButton = document.getElementById('close-todo');
-    const submitTodoButton = document.getElementById('submit-todo');
+    const submitTodoForm = document.querySelector('.form-todo');
 
-    submitTodoButton.addEventListener('click', addTask);
-    closeTodoButton.addEventListener('click', () => removeTodoForm());
-    submitTodoButton.addEventListener('click', () => removeTodoForm());
-    submitTodoButton.addEventListener('click', displayTasks(ind));
+    submitTodoForm.addEventListener('submit', addTask);
+    submitTodoForm.addEventListener('submit', removeTodoForm);
+    submitTodoForm.addEventListener('submit', displayTasks(ind));
+    closeTodoButton.addEventListener('click', removeTodoForm);
+
 }
 
 function innitFormInfoButtons (){
@@ -176,7 +179,7 @@ function creteInfoForm(title, description, dueDate) {
     const container = document.querySelector('.container');
 
     formInfo.innerHTML = `
-    <form action="info-form">
+    <form action="">
     <ul>
         <li>
             <label class="Info-title" for="name">Title:</label>
@@ -206,32 +209,31 @@ function creteInfoForm(title, description, dueDate) {
 function showTodoForm(ind) {
     const formTodo = document.querySelector('.form-todo-container');
 
-    console.log("Abriendo Formulario Todo");
-
     formTodo.innerHTML = `
-    <form class="form-todo" action="todo-form">
-    <ul>
-        <li>
-            <label class="Todo-title" for="name">Title:</label>
-            <input class="Todo-input" type="text" id="todo_title">
-        </li>
-        <li>
-            <label class="Todo-description" for="name">Description:</label>
-            <input class="Todo-input" type="text" id="todo_description">
-        </li>
-        <li>
-            <label class="Todo-duedate" for="name">Duedate:</label>
-            <input class="Todo-input" type="text" id="todo_duedate">
-        </li>
-        <div class="form-buttons">
+    <form class="form-todo" action="" data-index-submit-task="${ind}">
+        <ul>
             <li>
-                <button type="button" id="submit-todo" data-index-submit-task="${ind}">Add</button>
+                <label class="Todo-title" for="name">Title:</label>
+                <input class="Todo-input" type="text" id="todo_title">
             </li>
             <li>
-                <button type="button" id="close-todo">Close</button>
+                <label class="Todo-description" for="name">Description:</label>
+                <input class="Todo-input" type="text" id="todo_description">
             </li>
-        </div>
-    </ul>`
+            <li>
+                <label class="Todo-duedate" for="name">Duedate:</label>
+                <input class="Todo-input" type="date" id="todo_duedate">
+            </li>
+            <div class="form-buttons">
+                <li>
+                    <button type="submit" id="submit-todo" >Add</button>
+                </li>
+                <li>
+                    <button type="button" id="close-todo">Close</button>
+                </li>
+            </div>
+        </ul>
+    </form>`
 
     innitFormButtons(ind);
 }
@@ -243,7 +245,7 @@ function createEditForm(title, description, Duedate, ind, i){
     formEdit.classList.toggle("display");
 
     formEdit.innerHTML = `
-    <form action="info-edit">
+    <form action="">
     <ul>
         <li>
             <label class="Todo-title" for="name">Title:</label>
@@ -305,12 +307,10 @@ function displayProjects(i){
 
 function createEditProjectNameForm () {
     const ind = Number(this.getAttribute('data-index-project-edit'));
-    console.log('Creating Form');
     const newForm = document.querySelector('.form-edit-project');
     newForm.classList.toggle('display');
-    console.log('createEditProjectNameForm Index' + ind);
     newForm.innerHTML =         `
-    <form class="form-project" action="form-project">
+    <form class="form-project" action="">
     <ul>
         <li>
             <input type="text" id="todo_title_edit_project">
@@ -348,8 +348,6 @@ function updateProjectName (ind){
 
     const projectName = document.querySelectorAll('[data-index-project-name]');
     const arrayProjects = Array.from(projectName);
-    console.log(Array.from(projectName));
-    console.log('index parameter' + ind);
     arrayProjects[ind].innerHTML = myProjects[ind].name;
     displayProjectPreview(ind);
 }
@@ -359,13 +357,10 @@ function displayProjectPreview(i){
     let ind = i;
     try {ind = Number(this.getAttribute('data-index-project-name'));
     } catch (error) {
-        console.log(error);
+        
     }
-    console.log('ind' + ind);
     const projectTitle = document.querySelector('.project-title');
     projectTitle.innerHTML = myProjects[ind].name;
-
-    console.log('displaying Project Preview');
 
     displayTasks(ind);
     createAddTasksButton(ind);
@@ -386,15 +381,12 @@ function displayProjectsInStorage(myProjects) {
     for (let i = 0; i < myProjects.length; i++) {
         displayProjects(i);
     }
-    console.log('Projects lenght: ' + myProjects.length);
 }
 
 function displayTasks(ind) {
 
-    console.log('Display Tasks index variable:' + ind);
     const tasksList = document.querySelector('.tasks');
     tasksList.innerHTML = myProjects[ind].tasks.map((task, i) => {
-        console.log('amount of task in Project:' + i);
 
     return `
     <li> 
@@ -414,8 +406,6 @@ function displayTasks(ind) {
 
 
 function displayInfoTask() {
-    console.log(this);
-    console.log('displaying info task');
     let i = Number(this.getAttribute('data-index-info-task'));
     let ind = Number(this.getAttribute('data-index-info-task-project'));
     
@@ -444,7 +434,9 @@ function showForm(){
     form.classList.toggle("display");
 }
 
-function removeTodoForm() {
+function removeTodoForm(e) {
+    e.preventDefault()
+    
     const formTodo = document.querySelector('.form-todo-container');
     formTodo.innerHTML = '';
 }
@@ -453,11 +445,8 @@ function removeTodoForm() {
 function toggleDone(e) {
     if (!e.target.matches('label')) return; // skip this unless it's a label
     const el = e.target;
-    console.log(el);
     const index = el.dataset.index;
     const ind = el.dataset.project;
-    console.log('Index Task:' + index);
-    console.log('Index Project:' + ind);
     myProjects[ind].tasks[index].done = !myProjects[ind].tasks[index].done;
     localStorage.setItem('projects', JSON.stringify(myProjects));
   }
