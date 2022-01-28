@@ -1,396 +1,393 @@
-
 :root {
-    --primary-dark: #333;
-    --secondary-dark: #444;
-    --primary-light: #eee;
-    --secondary-light: #ddd;
-  }
+  --primary-dark: #333;
+  --secondary-dark: #444;
+  --primary-light: #eee;
+  --secondary-light: #ddd;
+}
 
 * {
-    margin: 0px;
-    padding: 0px;
- }
-
-html, body {
-    height:100%;
+  margin: 0px;
+  padding: 0px;
 }
 
-.header{
-    background-color: var(--primary-dark);
-    color: white;
-    padding: 2em;
-
+html,
+body {
+  height: 100%;
 }
 
-.container{
-    display: flex;
-    height: 100%;
-    background-color: var(--secondary-light);
-    transition: 0.5s;
+.header {
+  background-color: var(--primary-dark);
+  color: white;
+  padding: 2em;
+}
+
+.container {
+  display: flex;
+  height: 100%;
+  background-color: var(--secondary-light);
+  transition: 0.5s;
 }
 
 button {
-	background: none;
-	color: inherit;
-	border: 1px solid black;
-	padding: 0;
-	font: inherit;
-	cursor: pointer;
-	outline: inherit;
+  background: none;
+  color: inherit;
+  border: 1px solid black;
+  padding: 0;
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
-.nav{
-    background-color: var(--secondary-light);
-    width: 30%;
-    height: 100%;
-    padding: 10px;
+.nav {
+  background-color: var(--secondary-light);
+  width: 30%;
+  height: 100%;
+  padding: 10px;
 }
 
-.nav h2{
-    margin-left: 20px;
-    font-size: 28px;
-    text-decoration: underline;
-    margin-bottom: -10px;
+.nav h2 {
+  margin-left: 20px;
+  font-size: 28px;
+  text-decoration: underline;
+  margin-bottom: -10px;
 }
 
-.nav-wrapper{
-    display:inline-flex;
-    flex-direction: column;
-    padding: 20px;
-    row-gap: 30px;;
-    max-width: 100%;
-
+.nav-wrapper {
+  display: inline-flex;
+  flex-direction: column;
+  padding: 20px;
+  row-gap: 30px;
+  max-width: 100%;
 }
 
-.add-project-button{
-    width: 150px;
-    background-color: var(--primary-dark);
-    color:whitesmoke;
-    padding: 10px;
+.add-project-button {
+  width: 150px;
+  background-color: var(--primary-dark);
+  color: whitesmoke;
+  padding: 10px;
 }
 
-.form{
-    width: 228px;
-    position: relative;
-    z-index: 1;
-    background-color: var(--secondary-light);
-    border: 1px solid black;
-    padding: 1em;
-    display: block;
-    font-size: larger;
+.form {
+  width: 228px;
+  position: relative;
+  z-index: 1;
+  background-color: var(--secondary-light);
+  border: 1px solid black;
+  padding: 1em;
+  display: block;
+  font-size: larger;
 }
 
-.form div li{
-    width: 45%;
+.form div li {
+  width: 45%;
 }
 
-.form button{
-    width: 50px;
-    margin-top: 10px;
+.form button {
+  width: 50px;
+  margin-top: 10px;
 }
 
-.input{
-    width: 100%;
-    padding: 5px 0px 5px;
+.input {
+  width: 100%;
+  padding: 5px 0px 5px;
 }
 
-.form-buttons{
-    display: flex;
-    justify-content: space-between;
+.form-buttons {
+  display: flex;
+  justify-content: space-between;
 }
 
-#submit-project{
-    background-color: #aaffaa;
-    padding: 3px;
-    width: 100%;
-  
+#submit-project {
+  background-color: #aaffaa;
+  padding: 3px;
+  width: 100%;
 }
 
-#submit-edit, #close-edit{
-    width: 50px;
-    padding: 5px;
+#submit-edit,
+#close-edit {
+  width: 50px;
+  padding: 5px;
 }
 
-#close-project{
-    background-color: #ffbebe;
-    padding: 3px;
-    width: 100%;
+#close-project {
+  background-color: #ffbebe;
+  padding: 3px;
+  width: 100%;
 }
-
 
 ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.flex-project{
-    display: flex;
-    background-color: var(--secondary-light);
-    justify-content: space-between;
-    width: 250px;
-    margin-top: 10px;
-    font-size: larger;
-    padding: 10px;
+.flex-project {
+  display: flex;
+  background-color: var(--secondary-light);
+  justify-content: space-between;
+  width: 250px;
+  margin-top: 10px;
+  font-size: larger;
+  padding: 10px;
 }
 
-.flex-project li{
-    cursor: pointer;
+.flex-project li {
+  cursor: pointer;
 }
 
-.flex-buttons-div{
-    display: flex;
+.flex-buttons-div {
+  display: flex;
 }
 
-.flex-buttons-div img{
-    margin-right: 5px;
+.flex-buttons-div img {
+  margin-right: 5px;
 }
 
-.flex-project:hover .delete-project{
-    opacity: 0.8;
+.flex-project:hover .delete-project {
+  opacity: 0.8;
 }
 
-.flex-project:hover{
-    background-color: rgba(94, 76, 76, 0.534);
+.flex-project:hover {
+  background-color: rgba(94, 76, 76, 0.534);
 }
 
-.delete-project{
-    font-weight: bold;
-    cursor: pointer;
-    opacity: 0.1;
+.delete-project {
+  font-weight: bold;
+  cursor: pointer;
+  opacity: 0.1;
 }
 
-.project-task-container{
-    background-color: var(--primary-light);
-    width: 100%;
-    padding: 5px 30px;
+.project-task-container {
+  background-color: var(--primary-light);
+  width: 100%;
+  padding: 5px 30px;
 }
 
-.titles-tasks{
-    display: flex;
-    width: 77%;
-    justify-content: space-between;
-    margin-top: 40px;
+.titles-tasks {
+  display: flex;
+  width: 77%;
+  justify-content: space-between;
+  margin-top: 40px;
 }
 
-.titles-tasks h1{
-    margin-top: -20px;
+.titles-tasks h1 {
+  margin-top: -20px;
 }
 
 .tasks {
-    margin: 0;
-    padding: 0;
-    text-align: left;
-    list-style: none;
-    background-color: var(--primary-light);
-  }
-
-  .task-due-date{
-    background-color: var(--primary-light);
-    width: 90%;
-    display: grid;
-    grid-template-columns: 1fr 140px 20px 20px 20px;
-    grid-template-rows: 1fr;
-  }
-  
-  .tasks li {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-    padding: 10px 0;
-    font-weight: 100;
-    display: flex;
-  }
-  
-  .tasks label {
-    cursor: pointer;
-  }
-  
-  .tasks input {
-    display: none;
-  }
-  
-  .tasks input + label:before {
-    content: "⬜️";
-    margin-right: 10px;
-  }
-
-  .tasks input:checked + label:before {
-    content: "✓";
-  }
-
-  .edit-icon{
-      width:15px;
-      cursor: pointer;
-      opacity: 0.4;
-  }
-
-  .delete-icon{
-      width: 15px;
-      cursor: pointer;
-      opacity: 0.4;
-  }
-
-  .edit-icon:hover{
-      opacity: 1;
-  }
-
-  .delete-icon:hover{
-    opacity: 1;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  list-style: none;
+  background-color: var(--primary-light);
 }
 
-.info-icon{
-    width: 15px;
-    cursor: pointer;
-    opacity: 0.4;
+.task-due-date {
+  background-color: var(--primary-light);
+  width: 90%;
+  display: grid;
+  grid-template-columns: 1fr 140px 20px 20px 20px;
+  grid-template-rows: 1fr;
 }
 
-.info-icon:hover{
-    opacity: 1;
+.tasks li {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 10px 0;
+  font-weight: 100;
+  display: flex;
 }
 
-.form-todo{
-    margin-top: 30px;
-    position: relative;
-    z-index: 1;
-    background-color: white;
-    border: 1px solid black;
-    padding: 1em;
-    display: block;
-    width: 300px;
+.tasks label {
+  cursor: pointer;
 }
 
-.form-todo li{
-    padding: 10px;
+.tasks input {
+  display: none;
 }
 
-.form-todo input{
-    padding: 2px;
+.tasks input + label:before {
+  content: "⬜️";
+  margin-right: 10px;
 }
 
-.display{
-    display: none;
+.tasks input:checked + label:before {
+  content: "✓";
 }
 
-.add-task-button{
-    box-sizing: border-box;
-    background-color: var(--primary-dark);
-    color: whitesmoke;
-    padding: 5px 15px;
-    margin-top: 30px;
-    font-size: 35px;
-    font-weight: bold;
-    border-radius: 50%;
+.edit-icon {
+  width: 15px;
+  cursor: pointer;
+  opacity: 0.4;
 }
 
-#submit-todo{
-    background-color: #aaffaa;
-    padding: 3px;
-    width: 100%;
+.delete-icon {
+  width: 15px;
+  cursor: pointer;
+  opacity: 0.4;
 }
 
-#close-todo{
-    background-color: #ffbebe;
-    padding: 3px;
-    width: 100%;
+.edit-icon:hover {
+  opacity: 1;
 }
 
-.form-buttons li{
-    width: 40%;
-    text-align: center;
+.delete-icon:hover {
+  opacity: 1;
 }
 
-.project-title{
-    color: var(--primary-dark);
+.info-icon {
+  width: 15px;
+  cursor: pointer;
+  opacity: 0.4;
 }
 
-.form-info{
-    margin: 0 auto;
-    width: 400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 1em;
-    padding: 1em;
+.info-icon:hover {
+  opacity: 1;
 }
 
-.form-info li{
-    margin-bottom: 10px;
+.form-todo {
+  margin-top: 30px;
+  position: relative;
+  z-index: 1;
+  background-color: white;
+  border: 1px solid black;
+  padding: 1em;
+  display: block;
+  width: 300px;
+}
+
+.form-todo li {
+  padding: 10px;
+}
+
+.form-todo input {
+  padding: 2px;
+}
+
+.display {
+  display: none;
+}
+
+.add-task-button {
+  box-sizing: border-box;
+  background-color: var(--primary-dark);
+  color: whitesmoke;
+  padding: 5px 15px;
+  margin-top: 30px;
+  font-size: 35px;
+  font-weight: bold;
+  border-radius: 50%;
+}
+
+#submit-todo {
+  background-color: #aaffaa;
+  padding: 3px;
+  width: 100%;
+}
+
+#close-todo {
+  background-color: #ffbebe;
+  padding: 3px;
+  width: 100%;
+}
+
+.form-buttons li {
+  width: 40%;
+  text-align: center;
+}
+
+.project-title {
+  color: var(--primary-dark);
+}
+
+.form-info {
+  margin: 0 auto;
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 1em;
+  padding: 1em;
+}
+
+.form-info li {
+  margin-bottom: 10px;
 }
 
 .is-blurred {
-    filter: blur(2px);
-    -webkit-filter: blur(2px);
-    pointer-events: none;
-    user-select: none;
-  }
-
-#close-info{
-    position: absolute;
-    top: 4%;
-    right: 2%;
-    border: none;
+  filter: blur(2px);
+  -webkit-filter: blur(2px);
+  pointer-events: none;
+  user-select: none;
 }
 
-#close-info:hover{
-    background-color: #ccc;
+#close-info {
+  position: absolute;
+  top: 4%;
+  right: 2%;
+  border: none;
 }
 
-.form-edit{
-    margin: 0 auto;
-    width: 400px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    background-color: white;
-    border: 2px solid black;
-    border-radius: 1em;
-    padding: 1em;
+#close-info:hover {
+  background-color: #ccc;
 }
 
-.form-edit input{
-    width: 70%;
+.form-edit {
+  margin: 0 auto;
+  width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  background-color: white;
+  border: 2px solid black;
+  border-radius: 1em;
+  padding: 1em;
 }
 
-#todo_duedate_edit{
-    width: 30%;
-    margin-left: 20px;
+.form-edit input {
+  width: 70%;
 }
 
-#todo_title_edit{
-    width: 50%;
-    margin-left: 45px;
+#todo_duedate_edit {
+  width: 30%;
+  margin-left: 20px;
 }
 
-.form-edit li{
-    margin-bottom: 10px;
+#todo_title_edit {
+  width: 50%;
+  margin-left: 45px;
 }
 
-.form-edit-project{
-    margin-top: 10px;
-    position: relative;
-    width: 270px;
+.form-edit li {
+  margin-bottom: 10px;
 }
 
-.form-edit-project input{
-    width: 100%;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    margin-bottom: 5px;
+.form-edit-project {
+  margin-top: 10px;
+  position: relative;
+  width: 270px;
 }
 
-#close-project-name{
-    background-color: #ffbebe;
-    padding: 3px;
-    width: 100%;
+.form-edit-project input {
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 
-#submit-project-name{
-    background-color: #aaffaa;
-    padding: 3px;
-    width: 100%;
+#close-project-name {
+  background-color: #ffbebe;
+  padding: 3px;
+  width: 100%;
+}
+
+#submit-project-name {
+  background-color: #aaffaa;
+  padding: 3px;
+  width: 100%;
 }
