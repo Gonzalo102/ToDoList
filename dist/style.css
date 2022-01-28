@@ -160,7 +160,6 @@ ul {
     opacity: 0.1;
 }
 
-
 .project-task-container{
     background-color: var(--primary-light);
     width: 100%;
@@ -272,10 +271,14 @@ ul {
 }
 
 .add-task-button{
-      background-color: var(--primary-dark);
-      color: whitesmoke;
-      padding: 10px;
-      margin-top: 30px;
+    box-sizing: border-box;
+    background-color: var(--primary-dark);
+    color: whitesmoke;
+    padding: 5px 15px;
+    margin-top: 30px;
+    font-size: 35px;
+    font-weight: bold;
+    border-radius: 50%;
 }
 
 #submit-todo{

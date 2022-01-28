@@ -332,6 +332,7 @@ function innitProjectForms () {
     const submitProjectName = document.getElementById('submit-project-name');
     submitProjectName.addEventListener('click', editProjectName);
     submitProjectName.addEventListener('click', hideEditProjectForm);
+    
     const closeProjectName = document.getElementById('close-project-name');
     closeProjectName.addEventListener('click', hideEditProjectForm);
 }
@@ -373,7 +374,7 @@ function displayLastAddedProject(i){
 
 function createAddTasksButton(ind){
     const buttonDiv = document.querySelector('.button-task')
-    buttonDiv.innerHTML = `<button class="add-task-button" data-index-add-task-button="${ind}">+ Add New Task</button>`
+    buttonDiv.innerHTML = `<button class="add-task-button" data-index-add-task-button="${ind}">+</button>`
 }
 
 function displayProjectsInStorage(myProjects) {
